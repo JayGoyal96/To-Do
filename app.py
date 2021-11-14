@@ -3,7 +3,7 @@ from flask_pymongo import PyMongo
 from datetime import datetime
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://<username>:<password>@cluster0.2fhpk.mongodb.net/<database>?retryWrites=true&w=majority"
+app.config["MONGO_URI"] = process.env.URL
 mongo = PyMongo(app)
 db = mongo.db.infos
 
@@ -35,4 +35,4 @@ def delete(id):
     return redirect("/")
 
 if __name__ == "__main__":
-    app.run(debug=True, port=8000)
+    app.run(debug=True, port=process.env.PORT||8000)
